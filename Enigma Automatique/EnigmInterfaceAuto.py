@@ -17,11 +17,11 @@ class Screen:
     def __init__(self):
         # Crée la fenêtre principale
         self.window = Tk()
-        self.window.title("Enigma")
+        self.window.title("Enigma project")
         self.window.geometry("1920x1080")
         self.window.config(background="#283747")
         self.window.minsize(1480, 720)
-        self.window.iconbitmap("Enigma/Enigma Automatique/enigma.ico")
+        self.window.iconbitmap("enigma.ico")
 
         # Crée l'écran principale
         self.MainScreen = Frame(self.window, bg="#283747")
