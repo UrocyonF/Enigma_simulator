@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from tkinter import filedialog
+from string import ascii_uppercase
 
 import os
 
@@ -14,7 +15,7 @@ DCablage, LTRotor, LDecalageRotor, TReflecteur = {}, [], (0, 0, 0), ()
 Cablage, Rotor, DecalageRotor, Reflecteur = "", "", "", ""
 
 
-# Création de la classe TK
+# Création de la classe de l'écran TK
 class Screen:
 
     def __init__(self):
@@ -584,6 +585,7 @@ class Screen:
 
     # Fonction qui permet de passer de l'écran principal à l'écran des options
     def fGoToParametere(self):
+        #écrans à arrêter d'afficher
         self.MainScreen.pack_forget()
         self.SettingFrame.pack_forget()
         self.SettingFrameUp.pack_forget()
@@ -591,11 +593,14 @@ class Screen:
         self.InputFrame.pack_forget()
         self.TextInputFrame.pack_forget()
         self.TextOutputFrame.pack_forget()
+        #écran à afficher
         self.OptionScreen.pack()
 
     # Fonction qui permet de passer de l'écran des options à l'écran principal
     def fGoToMain(self):
+        #écran à arrêter d'afficher
         self.OptionScreen.pack_forget()
+        #écrans à afficher
         self.MainScreen.pack()
         self.SettingFrame.pack(side="left")
         self.SettingFrameUp.pack(expand="YES", fill="both")
@@ -608,7 +613,9 @@ class Screen:
     # Fonction qui gère l'affichage du réflecteur de l'écran principale
     def fAffichageReflecteur(self):
         global TReflecteur, Reflecteur
+        #change le nom (numéro) du réflecteur
         self.reflector1_label.set(f'Réflé {Reflecteur}')
+        #change le réflecteur pour l'affchage
         self.reflector11.set(TReflecteur[0])
         self.reflector12.set(TReflecteur[1])
         self.reflector13.set(TReflecteur[2])
@@ -618,9 +625,11 @@ class Screen:
     # Fonction qui gère l'affichage des rotors de l'écran principale
     def fAffichageRotor(self):
         global LTRotor, LDecalageRotor, Rotor
+        #change les noms (numéros) des rotors
         self.rotor1_label.set(f'Rotor {Rotor[2]}-{EnigmFonctionAuto.fEasyAffichNum(LDecalageRotor[2])}')
         self.rotor2_label.set(f'Rotor {Rotor[1]}-{EnigmFonctionAuto.fEasyAffichNum(LDecalageRotor[1])}')
         self.rotor3_label.set(f'Rotor {Rotor[0]}-{EnigmFonctionAuto.fEasyAffichNum(LDecalageRotor[0])}')
+        #change les rotors pour l'affchage en les faisant tourner si besoin
         let1, let2, let3, let4, let5 = EnigmFonctionAuto.fCalculPosRotor(LTRotor[2], LDecalageRotor[2])
         self.rotor11.set(let1)
         self.rotor12.set(let2)
@@ -640,10 +649,11 @@ class Screen:
         self.rotor34.set(let4)
         self.rotor35.set(let5)
 
-    # Fonction qui gère l'affichage du décalage des rotors de l'écran principale
+    # Fonction qui gère l'affichage des connexions à l'avant de la machine sur l'écran principale
     def fAffichageConnect(self):
         global DCablage
         ind, Lfait = 1, []
+        #fait apparaitre les connexions s'il y en a
         for key, value in DCablage.items():
             if (key not in Lfait) and (value not in Lfait):
                 self.window.setvar(name=f'connect{ind}_let1', value=key)
@@ -651,9 +661,14 @@ class Screen:
                 Lfait.append(key)
                 Lfait.append(value)
                 ind += 1
+        #fait disparaitre les connexions avant s'il n'y en a pas
+        for i in range(ind, 13):
+            self.window.setvar(name=f'connect{i}_let1', value="")
+            self.window.setvar(name=f'connect{i}_let2', value="")
 
 
-    # Fonction qui applique les changements pour le réflecteur
+    # Fonction qui applique les changements pour le réflecteur 
+    #vérifie l'entré - affiche un erreur en cas de problème - met à jour l'affichage une fois terminé
     def fApplyChangementReflecteur(self):
         global TReflecteur, Reflecteur
         verif, retour, refl = EnigmInputAuto.InputReflecteur(self.reflectortext.get())
@@ -664,6 +679,7 @@ class Screen:
         self.fAffichageReflecteur()
 
     # Fonction qui applique les changements pour les rotors
+    #vérifie l'entré - affiche un erreur en cas de problème - met à jour l'affichage une fois terminé
     def fApplyChangementRotors(self):
         global LTRotor, Rotor
         verif, retour, rot = EnigmInputAuto.InputRotor(self.numrotortext.get())
@@ -674,6 +690,7 @@ class Screen:
         self.fAffichageRotor()
 
     # Fonction qui applique les changements pour le décalage des rotors
+    #vérifie l'entré - affiche un erreur en cas de problème - met à jour l'affichage une fois terminé
     def fApllyChangementDecalage(self):
         global LDecalageRotor
         verif, retour = EnigmInputAuto.InputDecalageRotor(self.decalagetext.get())
@@ -684,17 +701,17 @@ class Screen:
         self.fAffichageRotor()
 
     # Fonction qui applique les changements pour le câblage
+    #vérifie l'entré - affiche un erreur en cas de problème - met à jour l'affichage une fois terminé
     def fApplyChangementConnect(self):
         global DCablage
         verif, retour = EnigmInputAuto.InputConnexAvant(self.connecttext.get())
         if verif == True:
             DCablage = retour
         else:
-            messagebox.showinfo(
-                "Action impossible (connections frontales)", retour)
+            messagebox.showinfo("Action impossible (connections frontales)", retour)
         self.fAffichageConnect()
 
-    # Fonction qui applique tous les changements
+    # Fonction qui applique tous les changements en même temps
     def fApplyChoice(self):
         self.fApplyChangementReflecteur()
         self.fApplyChangementRotors()
@@ -705,32 +722,34 @@ class Screen:
     # Fonction qui permet de créer des paramètres aléatoires
     def fRandomize(self):
         global Cablage, Rotor, DecalageRotor, Reflecteur
-        Cablage, Rotor, DecalageRotor, Reflecteur = EnigmComputAuto.fsubInputParametre()
+        Cablage = EnigmInputAuto.subInputConnexAvant(ascii_uppercase)
+        Rotor = EnigmInputAuto.subInputRotor()
+        DecalageRotor = EnigmInputAuto.subInputDecalageRotor()
+        Reflecteur = EnigmInputAuto.subInputReflecteur()
+        #affecte les variables pour l'affichage
         self.connecttext.set(Cablage)
         self.numrotortext.set(Rotor)
         self.decalagetext.set(DecalageRotor)
         self.reflectortext.set(Reflecteur)
 
-    # Fonction qui permet l'appel à EnigmComputAuro.py pour l'encryption du message
+    # Fonction qui permet l'appel à EnigmComputAuto.py pour l'encryption du message
     def fEncrypt(self):
         global DCablage, LTRotor, LDecalageRotor, TReflecteur
         Lintext = []
         intext = EnigmComputAuto.fInputTexte(self.inputtext.get())
-        for i in range(0, len(intext)+1, 4):
-            if i+4 < len(intext):
-                Lintext.append(''.join(intext[i:i+4]))
-            else:
-                Lintext.append(''.join(intext[i:]))
-        self.inputtext.set(' '.join(Lintext))
+        #mise en forme du texte d'entrée
+        self.inputtext.set(' '.join(EnigmFonctionAuto.fPuissanceTexte(intext)))
+        #mise en forme des variables sous un format acceptable par la fonction main (dictonaire)
         LDRotor, DReflecteur = EnigmComputAuto.fsubInputRealParametre(LTRotor, TReflecteur)
         outtext = EnigmComputAuto.main(DCablage, LDRotor, LDecalageRotor, DReflecteur, intext)
+        #affichage du résultat et de la rotation des rotors après encryption
         self.outputtext.set(outtext)
         self.fAffichageRotor()
 
-
-    # Fonction qui permet de gérer l'enregistrement des paramètres en QRcode
+    # Fonction qui permet de gérer la récupération d'un QRcode pour l'entrer dans les paramètres
     def fBrowseFiles(self):
         global Cablage, Rotor, DecalageRotor, Reflecteur
+        #ouverture du gestionaire de fichier
         filename = filedialog.askopenfilename(initialdir = "/", title = "Choisi un fichier",
             filetypes = (("image", ".jpeg"), ("image", ".png"), ("image", ".jpg")))
         rtn = EnigmInputAuto.QRcodeToData(filename)
@@ -738,6 +757,7 @@ class Screen:
             messagebox.showinfo("Erreur: ", rtn[0])
         else:
             try:
+                #changement des variables (pour l'affichage) sous le bon format à partir des données
                 data = rtn[1].strip("()").split(", ")
                 self.connecttext.set(data[0].strip('""').replace(":",": ").replace(",",", "))
                 Cablage = data[0].strip('""').replace(":",": ").replace(",",", ")
@@ -750,11 +770,12 @@ class Screen:
             except:
                 messagebox.showinfo("Erreur: ", "Erreur de format dans les données")
 
-    # Fonction qui permet de gérer la récupération d'un QRcode pour l'entrer dans les paramètres
+    # Fonction qui permet de gérer l'enregistrement des paramètres en QRcode (placé dans le ficher QRcode)
     def fEnregistrerFile(self):
         global Cablage, Rotor, DecalageRotor, Reflecteur
         data = (str(Cablage).replace(" ",""), Rotor, DecalageRotor, Reflecteur)
         i = 1
+        #choix du nom automatique et unique pour ne pas remplacé un précédent
         name = "QRCparametre"
         while os.path.isfile(f'QRcode/{name}.png'):
             name = f'QRCparametre{i}'

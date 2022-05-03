@@ -9,7 +9,7 @@ import qrcode
 import EnigmFonctionAuto
 
 
-# Toutes les tuples utilent pour la suite
+# Tous les tuples parmient lesquels on peut choisir (les 8 rotors et 3 réflecteurs disponiblent)
 RotorI = ('E', 'K', 'M', 'F', 'L', 'G', 'D', 'Q', 'V', 'Z', 'N', 'T', 'O', 'W', 'Y', 'H', 'X', 'U', 'S', 'P', 'A', 'I', 'B', 'R', 'C', 'J')
 RotorII = ('A', 'J', 'D', 'K', 'S', 'I', 'R', 'U', 'X', 'B', 'L', 'H', 'W', 'T', 'M', 'C', 'Q', 'G', 'Z', 'N', 'P', 'Y', 'F', 'V', 'O', 'E')
 RotorIII = ('B', 'D', 'F', 'H', 'J', 'L', 'C', 'P', 'R', 'T', 'X', 'V', 'Z', 'N', 'Y', 'E', 'I', 'W', 'G', 'A', 'K', 'M', 'U', 'S', 'Q', 'O')
@@ -25,7 +25,8 @@ ReflectorB = ('Y', 'R', 'U', 'H', 'Q', 'S', 'L', 'D', 'P', 'X', 'N', 'G', 'O', '
 ReflectorC = ('F', 'V', 'P', 'J', 'I', 'A', 'O', 'Y', 'E', 'D', 'R', 'Z', 'X', 'W', 'G', 'C', 'T', 'K', 'U', 'Q', 'S', 'B', 'N', 'M', 'H', 'L')
 TNomReflector = (ReflectorA, ReflectorB, ReflectorC)
 
-# qr pour la création du QRcode
+# Définition pour la création du QRcode (avec un taux de perte acceptable de 25%)
+#avec un taux de perte acceptable de 25% et un affichage classique
 qr = qrcode.QRCode(
     version=1,
     error_correction=qrcode.constants.ERROR_CORRECT_Q,
@@ -59,6 +60,7 @@ def InputConnexAvant(SCablage):
 
 
 # Fonction pour l'entrée des rotors qui vont être utilisé (vérification des entrées)
+#on donne un string à vérifier pour avoir 3 nombre entre 1 et 9 (numéro du rotor)
 def InputRotor(STRotor):
     verif, retour = EnigmFonctionAuto.fInputTroisNombre(STRotor, (1, 10), False)
     if verif == True:
@@ -67,6 +69,7 @@ def InputRotor(STRotor):
 
 
 # Fonction pour l'entrée du décalage innitiale des rotors (vérification des entrées)
+#on donne un string à vérifier pour avoir 3 nombre entre 0 et 26 (décalage innitiale des rotors)
 def InputDecalageRotor(SDecalageRotor):
     verif, retour = EnigmFonctionAuto.fInputTroisNombre(SDecalageRotor, (0, 26), True)
     return(verif, retour)
@@ -92,7 +95,8 @@ def InputReflecteur(SReflecteur):
     return(verif, retour, "")
 
 
-# Fonction pour entrer les rotors qui vont être utilisés en automatisé
+# Fonction pour créer les connexions frontales (plugboard) de façon aléatoire
+#on va renvoyer un dictionaire où chaque l'un va être lié à une autre
 def subInputConnexAvant(LettreAlphabet):
     DConnexionAvant, LLettreConnexion = {}, []
     for _ in range(randint(0, 12)):
@@ -109,13 +113,14 @@ def subInputConnexAvant(LettreAlphabet):
     return(DConnexionAvant)
 
 
-# Fonction pour entrer les rotors qui vont être utilisés en automatisé
+# Fonction pour choisir 3 rotors de façon aléatoire
+#on va renvoyer 3 chiffres où chacun ne pourra apparaitre qu'une fois
 def subInputRotor():
     numrotor = []
     numrotor = sample(range(1, 9), 3)
     return(numrotor)
 
-# Foncition pour mettre sous le bon format les rotors(num -> tuple) #
+# Foncition pour mettre sous le bon format les rotors (int -> tuple)
 def subTransfoInputRotor(numrotor):
     global TNomRotor
     LTRotor = []
@@ -124,24 +129,27 @@ def subTransfoInputRotor(numrotor):
     return(LTRotor)
 
 
-# Fonction pour entrer le décalage innitiale des rotors automatisé
+# Fonction pour choisir 3 décalages des rotors de façon aléatoire
+#on va renvoyer 3 nombres (entre 0 et 25) qui peuvent apparaitre plusieurs fois
 def subInputDecalageRotor():
     LDecalage = [randint(0, 25) for _ in range(3)]
     return(LDecalage)
 
 
-# Fonction pour entrer les rélfecteurs à utilisé en automatisé
+# Fonction pour choisir 1 réflecteur de façon aléatoire
+#on va renvoyer 1 chiffre (entre 0 et 3)
 def subInputReflecteur():
     numrot = randint(1, 3)
     return(numrot)
 
-# Fonction pour mettre sous le bon format les rélfecteurs (num -> tuple) #
+# Fonction pour mettre sous le bon format les rélfecteurs (int -> tuple)
 def subTransfoInputReflecteur(numrot):
     global TNomReflector
     return(TNomReflector[int(numrot)-1])
 
 
 # Fonction pour la création d'un QRcode en auto
+#on donne les données et le nom du l'image qui va être créé
 def DataToQRcode(data,name):
     try:
         qr.clear()
@@ -165,6 +173,5 @@ def QRcodeToData(file):
         return("Une erreur est survenu", False)
 
 
-# Sert à rien
 if __name__ == "__main__":
     pass

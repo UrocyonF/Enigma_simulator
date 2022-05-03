@@ -1,10 +1,10 @@
 from string import ascii_uppercase, ascii_lowercase
 
 import EnigmFonctionAuto
-import EnigmInputAuto
 
 
-# Liste utile pour vérifier et adapter le text entré par l'utilisateur
+# Liste utilent pour vérifier et adapter le texte entré par l'utilisateur
+#pour enlever les accents dans le texte d'input
 AccentA = ('á', 'à', 'â', 'ã', 'å', 'A')
 AccentO = ('ó', 'ò', 'ô', 'õ', 'ö', 'O')
 AccentE = ('é', 'è', 'ê', 'ë', 'E')
@@ -20,14 +20,6 @@ TAccents = (AccentA, AccentO, AccentE, AccentI, AccentU, AccentC, AccentY, Accen
 class Rotor():
     def __init__(self, rotor={}):
         self.__DRotor = rotor
-        self.__nrotation = 0
-
-    def fAffiche(self):
-        print(self.__DRotor, self.__nrotation)
-
-    def fModifClass(self, rotor):
-        self.__DRotor = rotor
-        self.__nrotation = 0
 
     def fRtnRotor(self, entre):
         return(self.__DRotor[entre])
@@ -37,8 +29,8 @@ class Rotor():
             if Litem[1] == entre:
                 return(Litem[0])
 
-    def fTurnRotor(self, number, rota):
-        self.__nrotation = rota
+    # Fonction pour faire tourner le rotor un nobre "number" de foix
+    def fTurnRotor(self, number):
         for _ in range(number):
             for let in ascii_uppercase:
                 if let == 'A':
@@ -56,45 +48,44 @@ class AllRotor():
         self.__TDRotors = rotors
         self.__Lnrotation = rota
 
-    def fAffiche(self):
-        print(self.__TDRotors, self.__Lnrotation)
-
-    def fModifClass(self, rotors, rota):
-        self.__TDRotors = rotors
-        self.__Lnrotation = rota
-
+    # Fonction qui nous retourne la lettre correspondant à une entrée pour un rotor et le fait tourner
     def fUseRotors(self, entre):
         for i in range(3):
             entre = self.__TDRotors[i].fRtnRotor(entre)
         return(entre)
 
+    # Fonction qui nous retourne la lettre correspondant à une sortie pour un rotor et le fait tourner
+    #fait la même chose que la fonction précédante mais à l'inverse (en partant des sorties)
     def fUseInvRotors(self, entre):
         for i in range(2, -1, -1):
             entre = self.__TDRotors[i].fRtnInvRotor(entre)
         return(entre)
 
+    # Fonction pour faire tourner les rotors
+    #fait tourner le premier rotor jusqu'à ce qu'il est fait un tour et fait alors tourner le suivant, ect...
     def fRotation(self):
         if self.__Lnrotation[0] == 25:
-            self.__TDRotors[0].fTurnRotor(1, 0)
+            self.__TDRotors[0].fTurnRotor(1)
             self.__Lnrotation[0] = 0
             if self.__Lnrotation[1] == 25:
-                self.__TDRotors[1].fTurnRotor(1, 0)
+                self.__TDRotors[1].fTurnRotor(1)
                 self.__Lnrotation[1] = 0
                 if self.__Lnrotation[2] == 25:
                     self.__Lnrotation[2] = 0
-                    self.__TDRotors[2].fTurnRotor(1, 0)
+                    self.__TDRotors[2].fTurnRotor(1)
                 else:
                     self.__Lnrotation[2] = self.__Lnrotation[2]+1
-                    self.__TDRotors[2].fTurnRotor(1, self.__Lnrotation[2])
+                    self.__TDRotors[2].fTurnRotor(1)
             else:
                 self.__Lnrotation[1] = self.__Lnrotation[1]+1
-                self.__TDRotors[1].fTurnRotor(1, self.__Lnrotation[1])
+                self.__TDRotors[1].fTurnRotor(1)
         else:
             self.__Lnrotation[0] = self.__Lnrotation[0]+1
-            self.__TDRotors[0].fTurnRotor(1, self.__Lnrotation[0])
+            self.__TDRotors[0].fTurnRotor(1)
 
 
 # Entré de la chaine de charactère qui va être crypté
+#met le string sous le bon format (minuscule -> majuscule, accent -> pas accent, pas d'autre caractère)
 def fInputTexte(STexte):
     LTextes = []
     for caractere in STexte:
@@ -107,30 +98,24 @@ def fInputTexte(STexte):
     return(LTextes)
 
 
-# Entré des paramètre utilisateur via les fonctions de EnigmInput et adaptation des listes obtenue en automatisé
-def fsubInputParametre():
-    DCablage = EnigmInputAuto.subInputConnexAvant(ascii_uppercase)
-    LTRotor = EnigmInputAuto.subInputRotor()
-    LDecalageRotor = EnigmInputAuto.subInputDecalageRotor()
-    TReflecteur = EnigmInputAuto.subInputReflecteur()
-    return(DCablage, LTRotor, LDecalageRotor, TReflecteur)
-
-# La même chose avec les variables au bon format
+# Fonction pour mettre les variables au bon format (liste -> dictionnaire) avec des lettres en majuscule
+#sert à la création des rotors
 def fsubInputRealParametre(LTRotor, TReflecteur):
     LDRotor, DReflecteur = [], {}
     for i in range(3):
-        LDRotor.append(EnigmFonctionAuto.fTupleToDico(
-            LTRotor[i], ascii_uppercase))
+        LDRotor.append(EnigmFonctionAuto.fTupleToDico(LTRotor[i], ascii_uppercase))
     DReflecteur = EnigmFonctionAuto.fTupleToDico(TReflecteur, ascii_uppercase)
     return(LDRotor, DReflecteur)
 
 
-# main fonction pour lancement automatisé
+# main fonction qui fait tout l'encryption
+#on donne les paramètres (les et dico des rotors, connexion...) et le texte à encrypter
+#fait appel aux fonction et class du dessus et renvoie alors le texte en sortie de la machine (en string)
 def main(DCablage, LDRotor, LDecalageRotor, DReflecteur, LinputTextes):
     CRotor1, CRotor2, CRotor3 = Rotor(
         LDRotor[0]), Rotor(LDRotor[1]), Rotor(LDRotor[2])
     for ind, rot in enumerate((CRotor1, CRotor2, CRotor3)):
-        rot.fTurnRotor(LDecalageRotor[ind], LDecalageRotor[ind])
+        rot.fTurnRotor(LDecalageRotor[ind])
     CRotors = AllRotor((CRotor1, CRotor2, CRotor3), LDecalageRotor)
     LrtnTextes = []
     for l in LinputTextes:
@@ -143,11 +128,9 @@ def main(DCablage, LDRotor, LDecalageRotor, DReflecteur, LinputTextes):
         if l in DCablage:
             l = DCablage[l]
         LrtnTextes.append(l)
-    for i in range(0, len(LrtnTextes)+2, 5):
-        LrtnTextes.insert(i, ' ')
-    return(''.join(LrtnTextes))
+    texte = ''.join(LrtnTextes)
+    return(' '.join(EnigmFonctionAuto.fPuissanceTexte(texte)))
 
 
-# Sert à rien
 if __name__ == '__main__':
     pass
