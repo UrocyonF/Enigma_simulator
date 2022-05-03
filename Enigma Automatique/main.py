@@ -1,5 +1,8 @@
 from tkinter import *
 from tkinter import messagebox
+from tkinter import filedialog
+
+import os
 
 import EnigmComputAuto
 import EnigmInputAuto
@@ -483,7 +486,11 @@ class Screen:
     def creat_option_screen(self):
         self.randomize_button = Button(self.OptionScreen, text="Randomizer", fg="#FDFEFE", 
             font=("Calibri", 20, "italic"), bg="#4A235A", command=self.fRandomize)
-        self.randomize_button.grid(pady=20, column=0, row=0)
+        self.randomize_button.grid(column=0, row=0, sticky="w")
+
+        self.import_button = Button(self.OptionScreen, text="Importer une configuration", fg="#FDFEFE", 
+            font=("Calibri", 20), bg="#21618C", command=self.fBrowseFiles)
+        self.import_button.grid(column=0, row=0, sticky="e")
 
         self.ConnectionFrame = Frame(self.OptionScreen, bg="#283747")
         self.creat_connect_widgets()
@@ -504,6 +511,10 @@ class Screen:
         self.retour_button = Button(self.OptionScreen, text="Retour", fg="#FDFEFE", 
             font=("Calibri", 20), bg="#0B5345", command=self.fGoToMain)
         self.retour_button.grid(column=0, row=5, sticky="w")
+
+        self.export_button = Button(self.OptionScreen, text="Enregistrer la configuration", fg="#FDFEFE", 
+            font=("Calibri", 20), bg="#21618C", command=self.fEnregistrerFile)
+        self.export_button.grid(column=0, row=5)
 
         self.aplly_button = Button(self.OptionScreen, text="Appliquer tout", fg="#FDFEFE", 
             font=("Calibri", 20), bg="#78281F", command=self.fApplyChoice)
@@ -715,6 +726,43 @@ class Screen:
         outtext = EnigmComputAuto.main(DCablage, LDRotor, LDecalageRotor, DReflecteur, intext)
         self.outputtext.set(outtext)
         self.fAffichageRotor()
+
+
+    # Fonction qui permet de gérer l'enregistrement des paramètres en QRcode
+    def fBrowseFiles(self):
+        global Cablage, Rotor, DecalageRotor, Reflecteur
+        filename = filedialog.askopenfilename(initialdir = "/", title = "Choisi un fichier",
+            filetypes = (("image", ".jpeg"), ("image", ".png"), ("image", ".jpg")))
+        rtn = EnigmInputAuto.QRcodeToData(filename)
+        if rtn[1] == False:
+            messagebox.showinfo("Erreur: ", rtn[0])
+        else:
+            try:
+                data = rtn[1].strip("()").split(", ")
+                self.connecttext.set(data[0].strip('""').replace(":",": ").replace(",",", "))
+                Cablage = data[0].strip('""').replace(":",": ").replace(",",", ")
+                self.numrotortext.set(f'{data[1]} {data[2]} {data[3]}'.strip('[]'))
+                Rotor = f'{data[1]} {data[2]} {data[3]}'.strip('[]')
+                self.decalagetext.set(f'{data[4]} {data[5]} {data[6]}'.strip('[]'))
+                DecalageRotor = f'{data[4]} {data[5]} {data[6]}'.strip('[]')
+                self.reflectortext.set(f'{data[7]}')
+                Reflecteur = f'{data[7]}'
+            except:
+                messagebox.showinfo("Erreur: ", "Erreur de format dans les données")
+
+    # Fonction qui permet de gérer la récupération d'un QRcode pour l'entrer dans les paramètres
+    def fEnregistrerFile(self):
+        global Cablage, Rotor, DecalageRotor, Reflecteur
+        data = (str(Cablage).replace(" ",""), Rotor, DecalageRotor, Reflecteur)
+        i = 1
+        name = "QRCparametre"
+        while os.path.isfile(f'QRcode/{name}.png'):
+            name = f'QRCparametre{i}'
+            i+=1
+        rtn = EnigmInputAuto.DataToQRcode(str(data), name)
+        if rtn[1] != True:
+            messagebox.showinfo("Erreur: ", rtn[0])
+
 
 
 # Boucle principale de l'affichage - main fonction

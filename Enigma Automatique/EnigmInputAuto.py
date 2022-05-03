@@ -1,6 +1,10 @@
 from random import randint, sample, choice
 from string import ascii_uppercase
 from ast import literal_eval
+from pyzbar import pyzbar
+from PIL import Image
+
+import qrcode
 
 import EnigmFonctionAuto
 
@@ -20,6 +24,14 @@ ReflectorA = ('E', 'J', 'M', 'Z', 'A', 'L', 'Y', 'X', 'V', 'B', 'W', 'F', 'C', '
 ReflectorB = ('Y', 'R', 'U', 'H', 'Q', 'S', 'L', 'D', 'P', 'X', 'N', 'G', 'O', 'K', 'M', 'I', 'E', 'B', 'F', 'Z', 'C', 'W', 'V', 'J', 'A', 'T')
 ReflectorC = ('F', 'V', 'P', 'J', 'I', 'A', 'O', 'Y', 'E', 'D', 'R', 'Z', 'X', 'W', 'G', 'C', 'T', 'K', 'U', 'Q', 'S', 'B', 'N', 'M', 'H', 'L')
 TNomReflector = (ReflectorA, ReflectorB, ReflectorC)
+
+# qr pour la création du QRcode
+qr = qrcode.QRCode(
+    version=1,
+    error_correction=qrcode.constants.ERROR_CORRECT_Q,
+    box_size=10,
+    border=1,
+)
 
 
 # Fonction pour vérifier l'entrée des paramètres de connexion à l'avant de la machine (vérification des entrées)
@@ -127,6 +139,30 @@ def subInputReflecteur():
 def subTransfoInputReflecteur(numrot):
     global TNomReflector
     return(TNomReflector[int(numrot)-1])
+
+
+# Fonction pour la création d'un QRcode en auto
+def DataToQRcode(data,name):
+    try:
+        qr.clear()
+        qr.add_data(data)
+        qr.make(fit=True)
+        img = qr.make_image(fill_color="black", back_color="white")
+        img.save(f'QRcode/{name}.png')
+        return("Enregistrement réussi", True)
+    except:
+        return("Une erreur est survenu", False)
+
+
+# Fonction pour la lecture d'un QRcode en auto
+def QRcodeToData(file):
+    try:
+        image = Image.open(file)
+        qr_code = pyzbar.decode(image)[0]
+        data= qr_code.data.decode("utf-8")
+        return("Lecture réussi", data)
+    except:
+        return("Une erreur est survenu", False)
 
 
 # Sert à rien
