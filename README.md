@@ -51,7 +51,7 @@ The project is organised as follow:
 ├── EnigmFonctionAuto.py
 ├── EnigmInputAuto.py
 ├── enigma.ico
-├── QRCode
+├── QRcode
 │   ├── QRCparametre.png
 │   ├── QRCparametre1.png
 ```
@@ -76,7 +76,7 @@ This file contains the function that will allow the user to enter the different 
 This file is the icon to be used by [tkinter](https://docs.python.org/3/library/tkinter.html) to display the icon of the program.
 #
 
-### [```QRCode```](/QRCode/)
+### [```QRcode```](/QRcode/)
 This folder contains the QR code that can be used to enter the parameters of the Enigma machine. There is already two exemple of QR code provided in the folder.
 
 ***
