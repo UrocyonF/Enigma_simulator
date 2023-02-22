@@ -52,8 +52,8 @@ The project is organised as follow:
 ├── EnigmInputAuto.py
 ├── enigma.ico
 ├── QRCode
-├──── QRCparametre.png
-├──── QRCparametre1.png
+│   ├── QRCparametre.png
+│   ├── QRCparametre1.png
 ```
 
 ### ```main.py```
