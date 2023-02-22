@@ -89,11 +89,11 @@ The main screen of the program look like this:
 ![Main Screen](main_screen.png)
 The different parts of the screen are:
 
-- In the left part of the screen :
+- In the left panel :
     - The current position of the reflector,
     - The current position of the three rotors,
     - The current position of the plugboards.
-- In the right part of the screen :
+- In the right panel :
     - The message to encrypt or decrypt,
     - The button to encrypt or decrypt the message,
     - The button to go to the option screen,
