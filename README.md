@@ -56,27 +56,27 @@ The project is organised as follow:
 │   ├── QRCparametre1.png
 ```
 
-### ```main.py```
+### [```main.py```](/main.py)
 This file is the main file of the project. It contains the main loop of the program. It also contains the function that allows to create the window of the program, it will call the other files to create the different windows of the program and compute the encryption or decryption of the message.
 #
 
-### ```EnigmComputAuto.py```
+### [```EnigmComputAuto.py```](/EnigmComputAuto.py)
 This file contains the function that will compute the encryption or decryption of the message step by step.
 #
 
-### ```EnigmFonctionAuto.py```
+### [```EnigmFonctionAuto.py```](/EnigmFonctionAuto.py)
 This file contains the different functions that will be used in the program, mostly used for the display of the different parts of the program.
 #
 
-### ```EnigmInputAuto.py```
+### [```EnigmInputAuto.py```](/EnigmInputAuto.py)
 This file contains the function that will allow the user to enter the different parameters of the Enigma machine, manually or by using a QR code. It will also check if the parameters entered are valid.
 #
 
-### ```enigma.ico```
+### [```enigma.ico```](/enigma.ico)
 This file is the icon to be used by [tkinter](https://docs.python.org/3/library/tkinter.html) to display the icon of the program.
 #
 
-### ```QRCode```
+### [```QRCode```](/QRCode/)
 This folder contains the QR code that can be used to enter the parameters of the Enigma machine. There is already two exemple of QR code provided in the folder.
 
 ***
