@@ -1,3 +1,8 @@
+"""
+Author: UrocyonF
+Date: 2021 - 2022
+"""
+
 from string import ascii_uppercase, ascii_lowercase
 
 import EnigmFonctionAuto
