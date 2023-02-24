@@ -53,7 +53,7 @@ The project is organised as follow:
 ├── enigma.ico
 ├── QRcode
 │   ├── QRCparametre.png
-│   ├── QRCparametre1.png
+╵   └── QRCparametre1.png
 ```
 
 ### [```main.py```](/main.py)
