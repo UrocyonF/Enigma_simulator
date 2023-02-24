@@ -1,3 +1,8 @@
+"""
+Author: UrocyonF
+Date: 2021 - 2022
+"""
+
 from random import randint, sample, choice
 from string import ascii_uppercase
 from ast import literal_eval
