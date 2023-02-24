@@ -1,3 +1,8 @@
+"""
+Author: UrocyonF
+Date: 2021 - 2022
+"""
+
 from tkinter import *
 from tkinter import messagebox
 from tkinter import filedialog
