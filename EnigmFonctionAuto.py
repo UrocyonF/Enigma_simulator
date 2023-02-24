@@ -1,3 +1,7 @@
+"""
+Author: UrocyonF
+Date: 2021 - 2022
+"""
 
 # Fonction pour demander 3 nombres en un seul input (+ saisi protégé au maximum)
 #on entre le string d'input, la range des 3 nombres et si ils peuvent similaire ou non
