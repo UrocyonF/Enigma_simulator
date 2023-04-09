@@ -21,16 +21,16 @@ import EnigmInputAuto
 import EnigmFonctionAuto
 
 
-# Création des variables globales nécessaire
+# Creation of the necessary global variables
 DCablage, LTRotor, LDecalageRotor, TReflecteur = {}, [], (0, 0, 0), ()
 Cablage, Rotor, DecalageRotor, Reflecteur = "", "", "", ""
 
 
-# Création de la classe de l'écran TK
+# Creating the screen class TK
 class Screen:
 
     def __init__(self):
-        # Crée la fenêtre principale
+        # Create the main window
         self.window = Tk()
         self.window.title("Enigma project")
         self.window.geometry("1920x1080")
@@ -38,21 +38,21 @@ class Screen:
         self.window.minsize(1480, 720)
         self.window.iconbitmap("enigma.ico")
 
-        # Crée l'écran principale
+        # Create the main screen
         self.MainScreen = Frame(self.window, bg="#283747")
         self.creat_main_screen()
         self.MainScreen.pack()
 
-        # Crée l'écran des options (paramètre) mais ne l'affiche pas
+        # Creates the options screen (parameter) but does not display it
         self.OptionScreen = Frame(self.window, bg="#283747")
         self.creat_option_screen()
 
-        # Met des paramètres aléatoires de base
+        # Puts basic random parameters
         self.fRandomize()
         self.fApplyChoice()
 
 
-    # Crée les 2 parties de l'écran principale (Settings et Input/Output)
+    # Create the 2 parts of the main screen (Settings and Input/Output)
     def creat_main_screen(self):
         self.SettingFrame = Frame(self.window, bg="#283747", bd=5)
         self.creat_settings_widgets()
@@ -62,7 +62,7 @@ class Screen:
         self.creat_inputs_widgets()
         self.InputFrame.pack(side="right")
 
-    # Crée les 2 parties de la partie Settings (écran principale)
+    # Create the 2 parts of the Settings part (main screen)
     def creat_settings_widgets(self):
         self.SettingFrameUp = Frame(self.SettingFrame, bg="#283747", bd=5)
         self.creat_settings_up_widgets()
@@ -72,7 +72,7 @@ class Screen:
         self.creat_settings_down_widgets()
         self.SettingFrameDown.pack(expand="YES", fill="both")
 
-    # Crée les 4 parties de la partie supérieurs de la partie des Settings (1 réflecteur et 3 rotors)
+    # Create the 4 parts of the upper part of the Settings part (1 reflector and 3 rotors)
     def creat_settings_up_widgets(self):
         self.Reflector1Frame = Frame(self.SettingFrameUp, bg="#283747", bd=5)
         self.creat_reflector1_widgets()
@@ -90,135 +90,111 @@ class Screen:
         self.creat_rotor3_widgets()
         self.Rotor3Frame.grid(column=4, row=0)
 
-    # Crée les élements de la partie réflecteur de la partie des Settings
+    # Create the elements of the reflector part of the Settings part
     def creat_reflector1_widgets(self):
         self.reflector1_label = StringVar()
-        self.reflector1_title = Label(self.Reflector1Frame, textvariable=self.reflector1_label, fg="#FDFEFE", 
-            font=("Calibri", 20, "bold"), bg="#2E4053")
+        self.reflector1_title = Label(self.Reflector1Frame, textvariable=self.reflector1_label, fg="#FDFEFE", font=("Calibri", 20, "bold"), bg="#2E4053")
         self.reflector1_title.grid(column=0, row=0)
 
         self.reflector11 = StringVar()
-        self.reflector11_title = Label(
-            self.Reflector1Frame, textvariable=self.reflector11, fg="#FDFEFE", font=("Calibri", 13), bg="#283747")
+        self.reflector11_title = Label(self.Reflector1Frame, textvariable=self.reflector11, fg="#FDFEFE", font=("Calibri", 13), bg="#283747")
         self.reflector11_title.grid(column=0, row=1)
 
         self.reflector12 = StringVar()
-        self.reflector12_title = Label(
-            self.Reflector1Frame, textvariable=self.reflector12, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.reflector12_title = Label(self.Reflector1Frame, textvariable=self.reflector12, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.reflector12_title.grid(column=0, row=2)
 
         self.reflector13 = StringVar()
-        self.reflector13_title = Label(
-            self.Reflector1Frame, textvariable=self.reflector13, fg="#FDFEFE", font=("Calibri", 20), bg="#283747")
+        self.reflector13_title = Label(self.Reflector1Frame, textvariable=self.reflector13, fg="#FDFEFE", font=("Calibri", 20), bg="#283747")
         self.reflector13_title.grid(column=0, row=3)
 
         self.reflector14 = StringVar()
-        self.reflector14_title = Label(
-            self.Reflector1Frame, textvariable=self.reflector14, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.reflector14_title = Label(self.Reflector1Frame, textvariable=self.reflector14, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.reflector14_title.grid(column=0, row=4)
 
         self.reflector15 = StringVar()
-        self.reflector15_title = Label(
-            self.Reflector1Frame, textvariable=self.reflector15, fg="#FDFEFE", font=("Calibri", 13), bg="#283747")
+        self.reflector15_title = Label(self.Reflector1Frame, textvariable=self.reflector15, fg="#FDFEFE", font=("Calibri", 13), bg="#283747")
         self.reflector15_title.grid(column=0, row=5)
 
-    # Crée les élements du premier rotor de la partie des Settings
+    # Create the elements of the first rotor of the Settings part
     def creat_rotor1_widgets(self):
         self.rotor1_label = StringVar()
-        self.rotor1_title = Label(self.Rotor1Frame, textvariable=self.rotor1_label, fg="#FDFEFE", 
-            font=("Calibri", 20, "bold"), bg="#2E4053")
+        self.rotor1_title = Label(self.Rotor1Frame, textvariable=self.rotor1_label, fg="#FDFEFE", font=("Calibri", 20, "bold"), bg="#2E4053")
         self.rotor1_title.grid(column=0, row=0)
 
         self.rotor11 = StringVar()
-        self.rotor11_title = Label(
-            self.Rotor1Frame, textvariable=self.rotor11, fg="#FDFEFE", font=("Calibri", 13), bg="#283747")
+        self.rotor11_title = Label(self.Rotor1Frame, textvariable=self.rotor11, fg="#FDFEFE", font=("Calibri", 13), bg="#283747")
         self.rotor11_title.grid(column=0, row=1)
 
         self.rotor12 = StringVar()
-        self.rotor12_title = Label(
-            self.Rotor1Frame, textvariable=self.rotor12, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.rotor12_title = Label(self.Rotor1Frame, textvariable=self.rotor12, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.rotor12_title.grid(column=0, row=2)
 
         self.rotor13 = StringVar()
-        self.rotor13_title = Label(
-            self.Rotor1Frame, textvariable=self.rotor13, fg="#FDFEFE", font=("Calibri", 20), bg="#283747")
+        self.rotor13_title = Label(self.Rotor1Frame, textvariable=self.rotor13, fg="#FDFEFE", font=("Calibri", 20), bg="#283747")
         self.rotor13_title.grid(column=0, row=3)
 
         self.rotor14 = StringVar()
-        self.rotor14_title = Label(
-            self.Rotor1Frame, textvariable=self.rotor14, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.rotor14_title = Label(self.Rotor1Frame, textvariable=self.rotor14, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.rotor14_title.grid(column=0, row=4)
 
         self.rotor15 = StringVar()
-        self.rotor15_title = Label(
-            self.Rotor1Frame, textvariable=self.rotor15, fg="#FDFEFE", font=("Calibri", 13), bg="#283747")
+        self.rotor15_title = Label(self.Rotor1Frame, textvariable=self.rotor15, fg="#FDFEFE", font=("Calibri", 13), bg="#283747")
         self.rotor15_title.grid(column=0, row=5)
 
-    # Crée les élements du deuxième rotor de la partie des Settings
+    # Create the elements of the second rotor from the Settings part
     def creat_rotor2_widgets(self):
         self.rotor2_label = StringVar()
-        self.rotor2_title = Label(self.Rotor2Frame, textvariable=self.rotor2_label, fg="#FDFEFE", 
-            font=("Calibri", 20, "bold"), bg="#2E4053")
+        self.rotor2_title = Label(self.Rotor2Frame, textvariable=self.rotor2_label, fg="#FDFEFE", font=("Calibri", 20, "bold"), bg="#2E4053")
         self.rotor2_title.grid(column=0, row=0)
 
         self.rotor21 = StringVar()
-        self.rotor21_title = Label(
-            self.Rotor2Frame, textvariable=self.rotor21, fg="#FDFEFE", font=("Calibri", 13), bg="#283747")
+        self.rotor21_title = Label(self.Rotor2Frame, textvariable=self.rotor21, fg="#FDFEFE", font=("Calibri", 13), bg="#283747")
         self.rotor21_title.grid(column=0, row=1)
 
         self.rotor22 = StringVar()
-        self.rotor22_title = Label(
-            self.Rotor2Frame, textvariable=self.rotor22, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.rotor22_title = Label(self.Rotor2Frame, textvariable=self.rotor22, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.rotor22_title.grid(column=0, row=2)
 
         self.rotor23 = StringVar()
-        self.rotor23_title = Label(
-            self.Rotor2Frame, textvariable=self.rotor23, fg="#FDFEFE", font=("Calibri", 20), bg="#283747")
+        self.rotor23_title = Label(self.Rotor2Frame, textvariable=self.rotor23, fg="#FDFEFE", font=("Calibri", 20), bg="#283747")
         self.rotor23_title.grid(column=0, row=3)
 
         self.rotor24 = StringVar()
-        self.rotor24_title = Label(
-            self.Rotor2Frame, textvariable=self.rotor24, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.rotor24_title = Label(self.Rotor2Frame, textvariable=self.rotor24, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.rotor24_title.grid(column=0, row=4)
 
         self.rotor25 = StringVar()
-        self.rotor25_title = Label(
-            self.Rotor2Frame, textvariable=self.rotor25, fg="#FDFEFE", font=("Calibri", 13), bg="#283747")
+        self.rotor25_title = Label(self.Rotor2Frame, textvariable=self.rotor25, fg="#FDFEFE", font=("Calibri", 13), bg="#283747")
         self.rotor25_title.grid(column=0, row=5)
 
-    # Crée les élements du troisième rotor de la partie des Settings
+    # Create the elements of the third rotor from the Settings part
     def creat_rotor3_widgets(self):
         self.rotor3_label = StringVar()
-        self.rotor3_title = Label(self.Rotor3Frame, textvariable=self.rotor3_label, fg="#FDFEFE", 
-            font=("Calibri", 20, "bold"), bg="#2E4053")
+        self.rotor3_title = Label(self.Rotor3Frame, textvariable=self.rotor3_label, fg="#FDFEFE", font=("Calibri", 20, "bold"), bg="#2E4053")
         self.rotor3_title.grid(column=0, row=0)
 
         self.rotor31 = StringVar()
-        self.rotor31_title = Label(
-            self.Rotor3Frame, textvariable=self.rotor31, fg="#FDFEFE", font=("Calibri", 13), bg="#283747")
+        self.rotor31_title = Label(self.Rotor3Frame, textvariable=self.rotor31, fg="#FDFEFE", font=("Calibri", 13), bg="#283747")
         self.rotor31_title.grid(column=0, row=1)
 
         self.rotor32 = StringVar()
-        self.rotor32_title = Label(
-            self.Rotor3Frame, textvariable=self.rotor32, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.rotor32_title = Label(self.Rotor3Frame, textvariable=self.rotor32, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.rotor32_title.grid(column=0, row=2)
 
         self.rotor33 = StringVar()
-        self.rotor33_title = Label(
-            self.Rotor3Frame, textvariable=self.rotor33, fg="#FDFEFE", font=("Calibri", 20), bg="#283747")
+        self.rotor33_title = Label(self.Rotor3Frame, textvariable=self.rotor33, fg="#FDFEFE", font=("Calibri", 20), bg="#283747")
         self.rotor33_title.grid(column=0, row=3)
 
         self.rotor34 = StringVar()
-        self.rotor34_title = Label(
-            self.Rotor3Frame, textvariable=self.rotor34, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.rotor34_title = Label(self.Rotor3Frame, textvariable=self.rotor34, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.rotor34_title.grid(column=0, row=4)
 
         self.rotor35 = StringVar()
-        self.rotor35_title = Label(
-            self.Rotor3Frame, textvariable=self.rotor35, fg="#FDFEFE", font=("Calibri", 13), bg="#283747")
+        self.rotor35_title = Label(self.Rotor3Frame, textvariable=self.rotor35, fg="#FDFEFE", font=("Calibri", 13), bg="#283747")
         self.rotor35_title.grid(column=0, row=5)
 
-    # Crée les 12 parties de la partie inférieur de la partie des Settings (12 connections avant possiblent)
+    # Creates the 12 parts of the lower part of the Settings part (12 front connections possible)
     def creat_settings_down_widgets(self):
         self.Connect1Frame = Frame(self.SettingFrameUp, bg="#283747", padx=45, bd=5)
         self.creat_connect1_widgets()
@@ -268,240 +244,195 @@ class Screen:
         self.creat_connect12_widgets()
         self.Connect12Frame.grid(column=5, row=7)
 
-    # Crée les élements de la première connection de la partie des Settings
+    # Create the elements of the first connection of the Settings part
     def creat_connect1_widgets(self):
-        self.connect1_title = Label(self.Connect1Frame, text="C1", fg="#FDFEFE", 
-            font=("Calibri", 20, "bold"), bg="#2E4053")
+        self.connect1_title = Label(self.Connect1Frame, text="C1", fg="#FDFEFE", font=("Calibri", 20, "bold"), bg="#2E4053")
         self.connect1_title.grid(column=0, row=0)
 
         self.connect1_let1, self.connect1_let2 = StringVar(name="connect1_let1"), StringVar(name="connect1_let2")
-        self.connect1_let1_title = Label(
-            self.Connect1Frame, textvariable=self.connect1_let1, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.connect1_let1_title = Label(self.Connect1Frame, textvariable=self.connect1_let1, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.connect1_let1_title.grid(column=0, row=1)
 
-        self.connect1_let2_title = Label(
-            self.Connect1Frame, textvariable=self.connect1_let2, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.connect1_let2_title = Label(self.Connect1Frame, textvariable=self.connect1_let2, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.connect1_let2_title.grid(column=0, row=3)
 
-    # Crée les élements de la deuxième connection de la partie des Settings
+    # Create the elements of the first connection of the Settings part
     def creat_connect2_widgets(self):
-        self.connect2_title = Label(self.Connect2Frame, text="C2", fg="#FDFEFE", 
-            font=("Calibri", 20, "bold"), bg="#2E4053")
+        self.connect2_title = Label(self.Connect2Frame, text="C2", fg="#FDFEFE", font=("Calibri", 20, "bold"), bg="#2E4053")
         self.connect2_title.grid(column=0, row=0)
 
         self.connect2_let1, self.connect2_let2 = StringVar(name="connect2_let1"), StringVar(name="connect2_let2")
-        self.connect2_let1_title = Label(
-            self.Connect2Frame, textvariable=self.connect2_let1, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.connect2_let1_title = Label(self.Connect2Frame, textvariable=self.connect2_let1, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.connect2_let1_title.grid(column=0, row=1)
 
-        self.connect2_let2_title = Label(
-            self.Connect2Frame, textvariable=self.connect2_let2, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.connect2_let2_title = Label(self.Connect2Frame, textvariable=self.connect2_let2, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.connect2_let2_title.grid(column=0, row=3)
 
-    # Crée les élements de la troisième connection de la partie des Settings
+    # Create the elements of the third connection of the Settings part
     def creat_connect3_widgets(self):
-        self.connect3_title = Label(self.Connect3Frame, text="C3", fg="#FDFEFE", 
-            font=("Calibri", 20, "bold"), bg="#2E4053")
+        self.connect3_title = Label(self.Connect3Frame, text="C3", fg="#FDFEFE", font=("Calibri", 20, "bold"), bg="#2E4053")
         self.connect3_title.grid(column=0, row=0)
 
         self.connect3_let1, self.connect3_let2 = StringVar(name="connect3_let1"), StringVar(name="connect3_let2")
-        self.connect3_let1_title = Label(
-            self.Connect3Frame, textvariable=self.connect3_let1, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.connect3_let1_title = Label(self.Connect3Frame, textvariable=self.connect3_let1, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.connect3_let1_title.grid(column=0, row=1)
 
-        self.connect3_let2_title = Label(
-            self.Connect3Frame, textvariable=self.connect3_let2, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.connect3_let2_title = Label(self.Connect3Frame, textvariable=self.connect3_let2, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.connect3_let2_title.grid(column=0, row=3)
 
-    # Crée les élements de la quatrième connection de la partie des Settings
+    # Create the elements of the fourth connection of the Settings part
     def creat_connect4_widgets(self):
-        self.connect4_title = Label(self.Connect4Frame, text="C4", fg="#FDFEFE", 
-            font=("Calibri", 20, "bold"), bg="#2E4053")
+        self.connect4_title = Label(self.Connect4Frame, text="C4", fg="#FDFEFE", font=("Calibri", 20, "bold"), bg="#2E4053")
         self.connect4_title.grid(column=0, row=0)
 
         self.connect4_let1, self.connect4_let2 = StringVar(name="connect4_let1"), StringVar(name="connect4_let2")
-        self.connect4_let1_title = Label(
-            self.Connect4Frame, textvariable=self.connect4_let1, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.connect4_let1_title = Label(self.Connect4Frame, textvariable=self.connect4_let1, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.connect4_let1_title.grid(column=0, row=1)
 
-        self.connect4_let2_title = Label(
-            self.Connect4Frame, textvariable=self.connect4_let2, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.connect4_let2_title = Label(self.Connect4Frame, textvariable=self.connect4_let2, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.connect4_let2_title.grid(column=0, row=3)
 
-    # Crée les élements de la cinquième connection de la partie des Settings
+    # Create the elements of the fifth connection of the Settings part
     def creat_connect5_widgets(self):
-        self.connect5_title = Label(self.Connect5Frame, text="C5", fg="#FDFEFE", 
-            font=("Calibri", 20, "bold"), bg="#2E4053")
+        self.connect5_title = Label(self.Connect5Frame, text="C5", fg="#FDFEFE", font=("Calibri", 20, "bold"), bg="#2E4053")
         self.connect5_title.grid(column=0, row=0)
 
         self.connect5_let1, self.connect5_let2 = StringVar(name="connect5_let1"), StringVar(name="connect5_let2")
-        self.connect5_let1_title = Label(
-            self.Connect5Frame, textvariable=self.connect5_let1, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.connect5_let1_title = Label(self.Connect5Frame, textvariable=self.connect5_let1, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.connect5_let1_title.grid(column=0, row=1)
 
-        self.connect5_let2_title = Label(
-            self.Connect5Frame, textvariable=self.connect5_let2, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.connect5_let2_title = Label(self.Connect5Frame, textvariable=self.connect5_let2, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.connect5_let2_title.grid(column=0, row=3)
 
-    # Crée les élements de la sixième connection de la partie des Settings
+    # Create the elements of the sixth connection of the Settings part
     def creat_connect6_widgets(self):
-        self.connect6_title = Label(self.Connect6Frame, text="C6", fg="#FDFEFE", 
-            font=("Calibri", 20, "bold"), bg="#2E4053")
+        self.connect6_title = Label(self.Connect6Frame, text="C6", fg="#FDFEFE", font=("Calibri", 20, "bold"), bg="#2E4053")
         self.connect6_title.grid(column=0, row=0)
 
         self.connect6_let1, self.connect6_let2 = StringVar(name="connect6_let1"), StringVar(name="connect6_let2")
-        self.connect6_let1_title = Label(
-            self.Connect6Frame, textvariable=self.connect6_let1, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.connect6_let1_title = Label(self.Connect6Frame, textvariable=self.connect6_let1, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.connect6_let1_title.grid(column=0, row=1)
 
-        self.connect6_let2_title = Label(
-            self.Connect6Frame, textvariable=self.connect6_let2, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.connect6_let2_title = Label(self.Connect6Frame, textvariable=self.connect6_let2, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.connect6_let2_title.grid(column=0, row=3)
 
-    # Crée les élements de la septième connection de la partie des Settings
+    # Create the elements of the seventh connection of the Settings part
     def creat_connect7_widgets(self):
-        self.connect7_title = Label(self.Connect7Frame, text="C7", fg="#FDFEFE", 
-            font=("Calibri", 20, "bold"), bg="#2E4053")
+        self.connect7_title = Label(self.Connect7Frame, text="C7", fg="#FDFEFE", font=("Calibri", 20, "bold"), bg="#2E4053")
         self.connect7_title.grid(column=0, row=0)
 
         self.connect7_let1, self.connect7_let2 = StringVar(name="connect7_let1"), StringVar(name="connect7_let2")
-        self.connect7_let1_title = Label(
-            self.Connect7Frame, textvariable=self.connect7_let1, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.connect7_let1_title = Label(self.Connect7Frame, textvariable=self.connect7_let1, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.connect7_let1_title.grid(column=0, row=1)
 
-        self.connect7_let2_title = Label(
-            self.Connect7Frame, textvariable=self.connect7_let2, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.connect7_let2_title = Label(self.Connect7Frame, textvariable=self.connect7_let2, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.connect7_let2_title.grid(column=0, row=3)
 
-    # Crée les élements de la huitième connection de la partie des Settings
+    # Create the elements of the eighth connection of the Settings part
     def creat_connect8_widgets(self):
-        self.connect8_title = Label(self.Connect8Frame, text="C8", fg="#FDFEFE", 
-            font=("Calibri", 20, "bold"), bg="#2E4053")
+        self.connect8_title = Label(self.Connect8Frame, text="C8", fg="#FDFEFE", font=("Calibri", 20, "bold"), bg="#2E4053")
         self.connect8_title.grid(column=0, row=0)
 
         self.connect8_let1, self.connect8_let2 = StringVar(name="connect8_let1"), StringVar(name="connect8_let2")
-        self.connect8_let1_title = Label(
-            self.Connect8Frame, textvariable=self.connect8_let1, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.connect8_let1_title = Label(self.Connect8Frame, textvariable=self.connect8_let1, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.connect8_let1_title.grid(column=0, row=1)
 
-        self.connect8_let2_title = Label(
-            self.Connect8Frame, textvariable=self.connect8_let2, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.connect8_let2_title = Label(self.Connect8Frame, textvariable=self.connect8_let2, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.connect8_let2_title.grid(column=0, row=3)
 
-    # Crée les élements de la neuvième connection de la partie des Settings
+    # Create the elements of the ninth connection of the Settings part
     def creat_connect9_widgets(self):
-        self.connect9_title = Label(self.Connect9Frame, text="C9", fg="#FDFEFE", 
-            font=("Calibri", 20, "bold"), bg="#2E4053")
+        self.connect9_title = Label(self.Connect9Frame, text="C9", fg="#FDFEFE", font=("Calibri", 20, "bold"), bg="#2E4053")
         self.connect9_title.grid(column=0, row=0)
 
         self.connect9_let1, self.connect9_let2 = StringVar(name="connect9_let1"), StringVar(name="connect9_let2")
-        self.connect9_let1_title = Label(
-            self.Connect9Frame, textvariable=self.connect9_let1, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.connect9_let1_title = Label(self.Connect9Frame, textvariable=self.connect9_let1, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.connect9_let1_title.grid(column=0, row=1)
 
-        self.connect9_let2_title = Label(
-            self.Connect9Frame, textvariable=self.connect9_let2, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.connect9_let2_title = Label(self.Connect9Frame, textvariable=self.connect9_let2, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.connect9_let2_title.grid(column=0, row=3)
 
-    # Crée les élements de la dixième connection de la partie des Settings
+    # Create the elements of the tenth connection of the Settings part
     def creat_connect10_widgets(self):
-        self.connect10_title = Label(self.Connect10Frame, text="C10", fg="#FDFEFE", 
-            font=("Calibri", 20, "bold"), bg="#2E4053")
+        self.connect10_title = Label(self.Connect10Frame, text="C10", fg="#FDFEFE", font=("Calibri", 20, "bold"), bg="#2E4053")
         self.connect10_title.grid(column=0, row=0)
 
         self.connect10_let1, self.connect10_let2 = StringVar(name="connect10_let1"), StringVar(name="connect10_let2")
-        self.connect10_let1_title = Label(
-            self.Connect10Frame, textvariable=self.connect10_let1, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.connect10_let1_title = Label(self.Connect10Frame, textvariable=self.connect10_let1, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.connect10_let1_title.grid(column=0, row=1)
 
-        self.connect10_let2_title = Label(
-            self.Connect10Frame, textvariable=self.connect10_let2, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.connect10_let2_title = Label(self.Connect10Frame, textvariable=self.connect10_let2, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.connect10_let2_title.grid(column=0, row=3)
 
-    # Crée les élements de la onzième connection de la partie des Settings
+    # Create the elements of the eleventh connection of the Settings part
     def creat_connect11_widgets(self):
-        self.connect11_title = Label(self.Connect11Frame, text="C11", fg="#FDFEFE", 
-            font=("Calibri", 20, "bold"), bg="#2E4053")
+        self.connect11_title = Label(self.Connect11Frame, text="C11", fg="#FDFEFE", font=("Calibri", 20, "bold"), bg="#2E4053")
         self.connect11_title.grid(column=0, row=0)
 
         self.connect11_let1, self.connect11_let2 = StringVar(name="connect11_let1"), StringVar(name="connect11_let2")
-        self.connect11_let1_title = Label(
-            self.Connect11Frame, textvariable=self.connect11_let1, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.connect11_let1_title = Label(self.Connect11Frame, textvariable=self.connect11_let1, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.connect11_let1_title.grid(column=0, row=1)
 
-        self.connect11_let2_title = Label(
-            self.Connect11Frame, textvariable=self.connect11_let2, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.connect11_let2_title = Label(self.Connect11Frame, textvariable=self.connect11_let2, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.connect11_let2_title.grid(column=0, row=3)
 
-    # Crée les élements de la douzième connection de la partie des Settings
+    # Create the elements of the twelfth connection of the Settings part
     def creat_connect12_widgets(self):
-        self.connect12_title = Label(self.Connect12Frame, text="C12", fg="#FDFEFE", 
-            font=("Calibri", 20, "bold"), bg="#2E4053")
+        self.connect12_title = Label(self.Connect12Frame, text="C12", fg="#FDFEFE", font=("Calibri", 20, "bold"), bg="#2E4053")
         self.connect12_title.grid(column=0, row=0)
 
         self.connect12_let1, self.connect12_let2 = StringVar(name="connect12_let1"), StringVar(name="connect12_let2")
-        self.connect12_let1_title = Label(
-            self.Connect12Frame, textvariable=self.connect12_let1, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.connect12_let1_title = Label(self.Connect12Frame, textvariable=self.connect12_let1, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.connect12_let1_title.grid(column=0, row=1)
 
-        self.connect12_let2_title = Label(
-            self.Connect12Frame, textvariable=self.connect12_let2, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
+        self.connect12_let2_title = Label(self.Connect12Frame, textvariable=self.connect12_let2, fg="#FDFEFE", font=("Calibri", 17), bg="#283747")
         self.connect12_let2_title.grid(column=0, row=3)
 
 
-    # Crée les 2 parties + 2 éléments de la partie Input/Output (écran principale)
+    # Create the 2 parts + 2 elements of the Input/Output part (main screen)
     def creat_inputs_widgets(self):
         self.TextInputFrame = Frame(self.InputFrame, bg="#283747",  bd=5)
         self.creat_inputs_text_widgets()
         self.TextInputFrame.grid(pady=20, column=0, row=0)
 
-        self.param_button = Button(self.InputFrame, text="Paramètres", fg="#FDFEFE", 
-            font=("Calibri", 20), bg="#0B5345", command=self.fGoToParametere)
+        self.param_button = Button(self.InputFrame, text="Paramètres", fg="#FDFEFE", font=("Calibri", 20), bg="#0B5345", command=self.fGoToParametere)
         self.param_button.grid(pady=20, column=0, row=1)
 
-        self.reinit_button = Button(self.InputFrame, text="Re-appliquer tout", fg="#FDFEFE", 
-            font=("Calibri", 20), bg="#78281F", command=self.fApplyChoice)
+        self.reinit_button = Button(self.InputFrame, text="Re-appliquer tout", fg="#FDFEFE", font=("Calibri", 20), bg="#78281F", command=self.fApplyChoice)
         self.reinit_button.grid(pady=20, column=0, row=2)
 
         self.TextOutputFrame = Frame(self.InputFrame, bg="#283747",  bd=5)
         self.creat_outputs_text_widgets()
         self.TextOutputFrame.grid(pady=20, column=0, row=3)
 
-    # Crée les élements de la partie Input de la partie Input/Output
+    # Creates the elements of the Input part of the Input/Output part
     def creat_inputs_text_widgets(self):
-        self.inputbox_title = Label(self.TextInputFrame, text="Entrer le texte à encrypter ici: ",
-            fg="#FDFEFE", font=("Calibri", 20, "bold"), bg="#283747")
+        self.inputbox_title = Label(self.TextInputFrame, text="Entrer le texte à encrypter ici: ",fg="#FDFEFE", font=("Calibri", 20, "bold"), bg="#283747")
         self.inputbox_title.pack()
 
         self.inputtext = StringVar()
-        self.input_entry = Entry(self.TextInputFrame, width=50, bg="#FBFCFC", 
-            font=("Calibri", 20), textvariable=self.inputtext)
+        self.input_entry = Entry(self.TextInputFrame, width=50, bg="#FBFCFC", font=("Calibri", 20), textvariable=self.inputtext)
         self.input_entry.pack()
 
-        self.input_button = Button(self.TextInputFrame, text="Encrypter", fg="#FDFEFE", 
-            font=("Calibri", 20), bg="#4A235A", command=self.fEncrypt)
+        self.input_button = Button(self.TextInputFrame, text="Encrypter", fg="#FDFEFE", font=("Calibri", 20), bg="#4A235A", command=self.fEncrypt)
         self.input_button.pack(pady=5)
 
-    # Crée les élements de la partie Output de la partie Input/Output
+    # Creates the elements of the Output part of the Input/Output part
     def creat_outputs_text_widgets(self):
-        self.inputbox_title = Label(self.TextOutputFrame, text="Voici le texte en sortie: ",
-            fg="#FDFEFE", font=("Calibri", 20, "bold"), bg="#283747")
+        self.inputbox_title = Label(self.TextOutputFrame, text="Voici le texte en sortie: ", fg="#FDFEFE", font=("Calibri", 20, "bold"), bg="#283747")
         self.inputbox_title.pack()
 
         self.outputtext = StringVar()
-        self.input_entry = Entry(self.TextOutputFrame, width=50, bg="#D0D3D4", fg="#5D6D7E", 
-            font=("Calibri", 20), state="disabled", textvariable=self.outputtext)
+        self.input_entry = Entry(self.TextOutputFrame, width=50, bg="#D0D3D4", fg="#5D6D7E", font=("Calibri", 20), state="disabled", textvariable=self.outputtext)
         self.input_entry.pack()
 
 
-    # Crée les 4 parties + 3 éléments de l'écrans des options
+    # Create the 4 parts + 3 elements of the options screen
     def creat_option_screen(self):
-        self.randomize_button = Button(self.OptionScreen, text="Randomizer", fg="#FDFEFE", 
-            font=("Calibri", 20, "italic"), bg="#4A235A", command=self.fRandomize)
+        self.randomize_button = Button(self.OptionScreen, text="Randomizer", fg="#FDFEFE", font=("Calibri", 20, "italic"), bg="#4A235A", command=self.fRandomize)
         self.randomize_button.grid(column=0, row=0, sticky="w")
 
-        self.import_button = Button(self.OptionScreen, text="Importer une configuration", fg="#FDFEFE", 
-            font=("Calibri", 20), bg="#21618C", command=self.fBrowseFiles)
+        self.import_button = Button(self.OptionScreen, text="Importer une configuration", fg="#FDFEFE", font=("Calibri", 20), bg="#21618C", command=self.fBrowseFiles)
         self.import_button.grid(column=0, row=0, sticky="e")
 
         self.ConnectionFrame = Frame(self.OptionScreen, bg="#283747")
@@ -520,83 +451,68 @@ class Screen:
         self.creat_reflector_widgets()
         self.ReflectorFrame.grid(pady=20, column=0, row=4)
 
-        self.retour_button = Button(self.OptionScreen, text="Retour", fg="#FDFEFE", 
-            font=("Calibri", 20), bg="#0B5345", command=self.fGoToMain)
+        self.retour_button = Button(self.OptionScreen, text="Retour", fg="#FDFEFE", font=("Calibri", 20), bg="#0B5345", command=self.fGoToMain)
         self.retour_button.grid(column=0, row=5, sticky="w")
 
-        self.export_button = Button(self.OptionScreen, text="Enregistrer la configuration", fg="#FDFEFE", 
-            font=("Calibri", 20), bg="#21618C", command=self.fEnregistrerFile)
+        self.export_button = Button(self.OptionScreen, text="Enregistrer la configuration", fg="#FDFEFE", font=("Calibri", 20), bg="#21618C", command=self.fEnregistrerFile)
         self.export_button.grid(column=0, row=5)
 
-        self.aplly_button = Button(self.OptionScreen, text="Appliquer tout", fg="#FDFEFE", 
-            font=("Calibri", 20), bg="#78281F", command=self.fApplyChoice)
+        self.aplly_button = Button(self.OptionScreen, text="Appliquer tout", fg="#FDFEFE", font=("Calibri", 20), bg="#78281F", command=self.fApplyChoice)
         self.aplly_button.grid(column=0, row=5, sticky="e")
 
-    # Crée les éléments de la partie connections frontales de l'écran des options
+    # Creates the elements of the front connections part of the options screen
     def creat_connect_widgets(self):
-        self.connectbox_title = Label(self.ConnectionFrame, text="Connections frontales (dictionnaire des lettres liées)", 
-            fg="#FDFEFE", font=("Calibri", 20), bg="#283747")
+        self.connectbox_title = Label(self.ConnectionFrame, text="Connections frontales (dictionnaire des lettres liées)", fg="#FDFEFE", font=("Calibri", 20), bg="#283747")
         self.connectbox_title.grid(column=0, row=0)
 
         self.connecttext = StringVar()
-        self.connect_entry = Entry(self.ConnectionFrame, width=50, bg="#FBFCFC", 
-            font=("Calibri", 20), textvariable=self.connecttext)
+        self.connect_entry = Entry(self.ConnectionFrame, width=50, bg="#FBFCFC", font=("Calibri", 20), textvariable=self.connecttext)
         self.connect_entry.grid(column=0, row=1)
 
-        self.connect_button = Button(self.ConnectionFrame, text="Appliquer", fg="#FDFEFE", 
-            font=("Calibri", 20), bg="#212F3C", command=self.fApplyChangementConnect)
+        self.connect_button = Button(self.ConnectionFrame, text="Appliquer", fg="#FDFEFE", font=("Calibri", 20), bg="#212F3C", command=self.fApplyChangementConnect)
         self.connect_button.grid(column=1, row=1)
 
-    # Crée les éléments de la partie numéro de rotor de l'écran des options
+    # Creates the items for the rotor number part of the options screen
     def creat_num_rotor_widgets(self):
-        self.numrotorbox_title = Label(
-            self.NumRotorFrame, text="Numéros des rotors (entre 1 et 9)", fg="#FDFEFE", font=("Calibri", 20), bg="#283747")
+        self.numrotorbox_title = Label(self.NumRotorFrame, text="Numéros des rotors (entre 1 et 9)", fg="#FDFEFE", font=("Calibri", 20), bg="#283747")
         self.numrotorbox_title.grid(column=0, row=0)
 
         self.numrotortext = StringVar()
-        self.numrotor_entry = Entry(self.NumRotorFrame, width=50, bg="#FBFCFC", 
-            font=("Calibri", 20), textvariable=self.numrotortext)
+        self.numrotor_entry = Entry(self.NumRotorFrame, width=50, bg="#FBFCFC", font=("Calibri", 20), textvariable=self.numrotortext)
         self.numrotor_entry.grid(column=0, row=1)
 
-        self.numrotor_button = Button(self.NumRotorFrame, text="Appliquer", fg="#FDFEFE", 
-            font=("Calibri", 20), bg="#212F3C", command=self.fApplyChangementRotors)
+        self.numrotor_button = Button(self.NumRotorFrame, text="Appliquer", fg="#FDFEFE", font=("Calibri", 20), bg="#212F3C", command=self.fApplyChangementRotors)
         self.numrotor_button.grid(column=1, row=1)
 
-    # Crée les éléments de la partie décalage des rotors de l'écran des options
+    # Creates the items for the rotor offset part of the options screen
     def creat_decalage_widgets(self):
-        self.decalagebox_title = Label(
-            self.DecalageFrame, text="Décalages des rotors (entre 0 et 25)", fg="#FDFEFE", font=("Calibri", 20), bg="#283747")
+        self.decalagebox_title = Label(self.DecalageFrame, text="Décalages des rotors (entre 0 et 25)", fg="#FDFEFE", font=("Calibri", 20), bg="#283747")
         self.decalagebox_title.grid(column=0, row=0)
 
         self.decalagetext = StringVar()
-        self.decalage_entry = Entry(self.DecalageFrame, width=50, bg="#FBFCFC", 
-            font=("Calibri", 20), textvariable=self.decalagetext)
+        self.decalage_entry = Entry(self.DecalageFrame, width=50, bg="#FBFCFC", font=("Calibri", 20), textvariable=self.decalagetext)
         self.decalage_entry.grid(column=0, row=1)
 
-        self.decalage_button = Button(self.DecalageFrame, text="Appliquer", fg="#FDFEFE", 
-            font=("Calibri", 20), bg="#212F3C", command=self.fApllyChangementDecalage)
+        self.decalage_button = Button(self.DecalageFrame, text="Appliquer", fg="#FDFEFE", font=("Calibri", 20), bg="#212F3C", command=self.fApllyChangementDecalage)
         self.decalage_button.grid(column=1, row=1)
 
-    # Crée les éléments de la partie réflecteur de l'écran des options
+    # Creates the elements of the reflector part of the options screen
     def creat_reflector_widgets(self):
-        self.reflectorbox_title = Label(
-            self.ReflectorFrame, text="Numéro du reflecteur (entre 1 et 3)", fg="#FDFEFE", font=("Calibri", 20), bg="#283747")
+        self.reflectorbox_title = Label(self.ReflectorFrame, text="Numéro du reflecteur (entre 1 et 3)", fg="#FDFEFE", font=("Calibri", 20), bg="#283747")
         self.reflectorbox_title.grid(column=0, row=0)
 
         self.reflectortext = StringVar()
-        self.reflector_entry = Entry(self.ReflectorFrame, width=50, bg="#FBFCFC", 
-            font=("Calibri", 20), textvariable=self.reflectortext)
+        self.reflector_entry = Entry(self.ReflectorFrame, width=50, bg="#FBFCFC", font=("Calibri", 20), textvariable=self.reflectortext)
         self.reflector_entry.grid(column=0, row=1)
 
-        self.reflector_button = Button(self.ReflectorFrame, text="Appliquer", fg="#FDFEFE", 
-            font=("Calibri", 20), bg="#212F3C", command=self.fApplyChangementReflecteur)
+        self.reflector_button = Button(self.ReflectorFrame, text="Appliquer", fg="#FDFEFE", font=("Calibri", 20), bg="#212F3C", command=self.fApplyChangementReflecteur)
         self.reflector_button.grid(column=1, row=1)
 
 
 
-    # Fonction qui permet de passer de l'écran principal à l'écran des options
+    # Function that allows you to switch from the main screen to the options screen
     def fGoToParametere(self):
-        #écrans à arrêter d'afficher
+        # screens to stop displaying
         self.MainScreen.pack_forget()
         self.SettingFrame.pack_forget()
         self.SettingFrameUp.pack_forget()
@@ -604,14 +520,14 @@ class Screen:
         self.InputFrame.pack_forget()
         self.TextInputFrame.pack_forget()
         self.TextOutputFrame.pack_forget()
-        #écran à afficher
+        # screen to display
         self.OptionScreen.pack()
 
-    # Fonction qui permet de passer de l'écran des options à l'écran principal
+    # Function that allows you to switch from the options screen to the main screen
     def fGoToMain(self):
-        #écran à arrêter d'afficher
+        # screen to stop displaying
         self.OptionScreen.pack_forget()
-        #écrans à afficher
+        # screens to display
         self.MainScreen.pack()
         self.SettingFrame.pack(side="left")
         self.SettingFrameUp.pack(expand="YES", fill="both")
@@ -621,26 +537,26 @@ class Screen:
         self.TextOutputFrame.grid(pady=20, column=0, row=3)
 
 
-    # Fonction qui gère l'affichage du réflecteur de l'écran principale
+    # Function that manages the display of the main screen reflector
     def fAffichageReflecteur(self):
         global TReflecteur, Reflecteur
-        #change le nom (numéro) du réflecteur
+        # change the name (number) of the reflector
         self.reflector1_label.set(f'Réflé {Reflecteur}')
-        #change le réflecteur pour l'affchage
+        # change the reflector for the display
         self.reflector11.set(TReflecteur[0])
         self.reflector12.set(TReflecteur[1])
         self.reflector13.set(TReflecteur[2])
         self.reflector14.set(TReflecteur[3])
         self.reflector15.set(TReflecteur[4])
 
-    # Fonction qui gère l'affichage des rotors de l'écran principale
+    # Function that manages the display of the main screen rotors
     def fAffichageRotor(self):
         global LTRotor, LDecalageRotor, Rotor
-        #change les noms (numéros) des rotors
+        # change the names (numbers) of the rotors
         self.rotor1_label.set(f'Rotor {Rotor[2]}-{EnigmFonctionAuto.fEasyAffichNum(LDecalageRotor[2])}')
         self.rotor2_label.set(f'Rotor {Rotor[1]}-{EnigmFonctionAuto.fEasyAffichNum(LDecalageRotor[1])}')
         self.rotor3_label.set(f'Rotor {Rotor[0]}-{EnigmFonctionAuto.fEasyAffichNum(LDecalageRotor[0])}')
-        #change les rotors pour l'affchage en les faisant tourner si besoin
+        # change the rotors for the display by rotating them if necessary
         let1, let2, let3, let4, let5 = EnigmFonctionAuto.fCalculPosRotor(LTRotor[2], LDecalageRotor[2])
         self.rotor11.set(let1)
         self.rotor12.set(let2)
@@ -660,11 +576,11 @@ class Screen:
         self.rotor34.set(let4)
         self.rotor35.set(let5)
 
-    # Fonction qui gère l'affichage des connexions à l'avant de la machine sur l'écran principale
+    # Function that manages the display of connections on the front of the machine on the main screen
     def fAffichageConnect(self):
         global DCablage
         ind, Lfait = 1, []
-        #fait apparaitre les connexions s'il y en a
+        # shows the connections if there are any
         for key, value in DCablage.items():
             if (key not in Lfait) and (value not in Lfait):
                 self.window.setvar(name=f'connect{ind}_let1', value=key)
@@ -672,14 +588,14 @@ class Screen:
                 Lfait.append(key)
                 Lfait.append(value)
                 ind += 1
-        #fait disparaitre les connexions avant s'il n'y en a pas
+        # make the front connections disappear if there are none
         for i in range(ind, 13):
             self.window.setvar(name=f'connect{i}_let1', value="")
             self.window.setvar(name=f'connect{i}_let2', value="")
 
 
-    # Fonction qui applique les changements pour le réflecteur 
-    #vérifie l'entré - affiche un erreur en cas de problème - met à jour l'affichage une fois terminé
+    # Function that applies changes for the reflector 
+    # check input - show error if there is a problem - update display when done
     def fApplyChangementReflecteur(self):
         global TReflecteur, Reflecteur
         verif, retour, refl = EnigmInputAuto.InputReflecteur(self.reflectortext.get())
@@ -689,8 +605,8 @@ class Screen:
             messagebox.showinfo("Action impossible (reflecteur)", retour)
         self.fAffichageReflecteur()
 
-    # Fonction qui applique les changements pour les rotors
-    #vérifie l'entré - affiche un erreur en cas de problème - met à jour l'affichage une fois terminé
+    # Function that applies changes for rotors
+    # check input - show error if there is a problem - update display when done
     def fApplyChangementRotors(self):
         global LTRotor, Rotor
         verif, retour, rot = EnigmInputAuto.InputRotor(self.numrotortext.get())
@@ -700,8 +616,8 @@ class Screen:
             messagebox.showinfo("Action impossible (rotors)", retour)
         self.fAffichageRotor()
 
-    # Fonction qui applique les changements pour le décalage des rotors
-    #vérifie l'entré - affiche un erreur en cas de problème - met à jour l'affichage une fois terminé
+    # Function that applies the changes for the offset of the rotors
+    # check input - show error if there is a problem - update display when done
     def fApllyChangementDecalage(self):
         global LDecalageRotor
         verif, retour = EnigmInputAuto.InputDecalageRotor(self.decalagetext.get())
@@ -711,8 +627,8 @@ class Screen:
             messagebox.showinfo("Action impossible (décalage)", retour)
         self.fAffichageRotor()
 
-    # Fonction qui applique les changements pour le câblage
-    #vérifie l'entré - affiche un erreur en cas de problème - met à jour l'affichage une fois terminé
+    # Function that applies changes for wiring
+    # check input - show error if there is a problem - update display when done
     def fApplyChangementConnect(self):
         global DCablage
         verif, retour = EnigmInputAuto.InputConnexAvant(self.connecttext.get())
@@ -722,7 +638,7 @@ class Screen:
             messagebox.showinfo("Action impossible (connections frontales)", retour)
         self.fAffichageConnect()
 
-    # Fonction qui applique tous les changements en même temps
+    # Function that applies all changes at the same time
     def fApplyChoice(self):
         self.fApplyChangementReflecteur()
         self.fApplyChangementRotors()
@@ -730,7 +646,7 @@ class Screen:
         self.fApplyChangementConnect()
 
 
-    # Fonction qui permet de créer des paramètres aléatoires
+    # Function that allows you to create random parameters
     def fRandomize(self):
         global Cablage, Rotor, DecalageRotor, Reflecteur
         Cablage = EnigmInputAuto.subInputConnexAvant(ascii_uppercase)
@@ -743,24 +659,24 @@ class Screen:
         self.decalagetext.set(DecalageRotor)
         self.reflectortext.set(Reflecteur)
 
-    # Fonction qui permet l'appel à EnigmComputAuto.py pour l'encryption du message
+    # Function that allows the call to EnigmComputAuto.py for the encryption of the message
     def fEncrypt(self):
         global DCablage, LTRotor, LDecalageRotor, TReflecteur
         Lintext = []
         intext = EnigmComputAuto.fInputTexte(self.inputtext.get())
-        #mise en forme du texte d'entrée
+        # input text formatting
         self.inputtext.set(' '.join(EnigmFonctionAuto.fPuissanceTexte(intext)))
-        #mise en forme des variables sous un format acceptable par la fonction main (dictonaire)
+        # formatting variables in a format acceptable to the main function (dictionary)
         LDRotor, DReflecteur = EnigmComputAuto.fsubInputRealParametre(LTRotor, TReflecteur)
         outtext = EnigmComputAuto.main(DCablage, LDRotor, LDecalageRotor, DReflecteur, intext)
-        #affichage du résultat et de la rotation des rotors après encryption
+        # display of the result and the rotation of the rotors after encryption
         self.outputtext.set(outtext)
         self.fAffichageRotor()
 
-    # Fonction qui permet de gérer la récupération d'un QRcode pour l'entrer dans les paramètres
+    # Function that allows you to manage the recovery of a QRcode to enter it in the settings
     def fBrowseFiles(self):
         global Cablage, Rotor, DecalageRotor, Reflecteur
-        #ouverture du gestionaire de fichier
+        # open file manager
         filename = filedialog.askopenfilename(initialdir = "/", title = "Choisi un fichier",
             filetypes = (("image", ".jpeg"), ("image", ".png"), ("image", ".jpg")))
         rtn = EnigmInputAuto.QRcodeToData(filename)
@@ -768,7 +684,7 @@ class Screen:
             messagebox.showinfo("Erreur: ", rtn[0])
         else:
             try:
-                #changement des variables (pour l'affichage) sous le bon format à partir des données
+                # change of variables (for display) in the correct format from the data
                 data = rtn[1].strip("()").split(", ")
                 self.connecttext.set(data[0].strip('""').replace(":",": ").replace(",",", "))
                 Cablage = data[0].strip('""').replace(":",": ").replace(",",", ")
@@ -781,12 +697,12 @@ class Screen:
             except:
                 messagebox.showinfo("Erreur: ", "Erreur de format dans les données")
 
-    # Fonction qui permet de gérer l'enregistrement des paramètres en QRcode (placé dans le ficher QRcode)
+    # Function that allows you to manage the saving of parameters in QRcode (placed in the QRcode file)
     def fEnregistrerFile(self):
         global Cablage, Rotor, DecalageRotor, Reflecteur
         data = (str(Cablage).replace(" ",""), Rotor, DecalageRotor, Reflecteur)
         i = 1
-        #choix du nom automatique et unique pour ne pas remplacé un précédent
+        # choice of automatic and unique name so as not to replace a previous one
         name = "QRCparametre"
         while os.path.isfile(f'QRcode/{name}.png'):
             name = f'QRCparametre{i}'
@@ -797,12 +713,12 @@ class Screen:
 
 
 
-# Boucle principale de l'affichage - main fonction
+# Display main loop - main function
 def main():
     app = Screen()
     app.window.mainloop()
 
 
-# Sert à lancé la fonction main()
+# Used to launch the main() function
 if __name__ == '__main__':
     main()
