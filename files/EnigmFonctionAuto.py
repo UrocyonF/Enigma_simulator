@@ -9,41 +9,41 @@ Author: UrocyonF
 Date: 2021 - 2022
 """
 
-# Fonction pour demander 3 nombres en un seul input (+ saisi protégé au maximum)
-#on entre le string d'input, la range des 3 nombres et si ils peuvent similaire ou non
+# Function to request 3 numbers in a single input (+ input protected as much as possible)
+# we enter the input string, the range of the 3 numbers and if they can be similar or no
 def fInputTroisNombre(inputstring, inputrange, meme):
     returnlist = []
     inputlist = inputstring.strip('()').replace(',', '').split(" ")
     if len(inputlist) != 3:
-        return(False, "Seulement trois nombres (sans espace à la fin mais entre eux)")
+        return(False, "Only three numbers (no spaces at the end but between them)")
     for val in inputlist:
         try:
             if int(val) not in range(inputrange[0], inputrange[1]):
-                return(False, f'Les nombres ne sont pas dans le bon intervalle ({inputrange[0]} à {inputrange[1]-1})')
+                return(False, f'The numbers are not in the correct range ({inputrange[0]} to {inputrange[1]-1})')
             if meme == False:
                 if not(int(val) in returnlist):
                     returnlist.append(int(val))
                 else:
-                    return(False, "Un nombre est saisi plusieurs fois")
+                    return(False, "A number is entered more than once")
             else:
                 returnlist.append(int(val))
         except ValueError:
-            return(False, "Les nombres ne sont pas des entiers")
+            return(False, "Numbers are not integers")
     return(True, returnlist)
 
 
-# Fonction pour l'affichage des rotors selon leurs décalages
-#on donne un rotor et le décalage de celui-ci et la fonction nous retourne le rotor un fois tourné
+# Function for displaying rotors according to their offsets
+# we give a rotor and its offset and the function returns the rotor once rotated
 def fCalculPosRotor(rotor, decalage):
     if decalage < 23:
-        return(rotor[decalage-2], rotor[decalage-1], rotor[decalage], rotor[decalage+1], rotor[decalage+2])
+        return((rotor[decalage-2], rotor[decalage-1], rotor[decalage], rotor[decalage+1], rotor[decalage+2]))
     elif decalage == 24:
-        return(rotor[decalage-2], rotor[decalage-1], rotor[decalage], rotor[decalage+1], rotor[0])
+        return((rotor[decalage-2], rotor[decalage-1], rotor[decalage], rotor[decalage+1], rotor[0]))
     else:
-        return(rotor[decalage-2], rotor[decalage-1], rotor[decalage], rotor[0], rotor[1])
+        return((rotor[decalage-2], rotor[decalage-1], rotor[decalage], rotor[0], rotor[1]))
 
 
-# Fonction pour l'affichage des nombre à 1 chiffre en les mettant sous forme de nombre à 2 chiffres
+# Function for displaying 1-digit numbers by putting them as 2-digit numbers
 def fEasyAffichNum(num):
     if num < 10:
         return(f'0{num}')
@@ -51,7 +51,7 @@ def fEasyAffichNum(num):
         return(f'{num}')
 
 
-# Fonction qui transforme un tuple en un dicotionaire, en donnant à chaque lettre de l'alphabet un élément du tuple
+# Function that turns a tuple into a dictionary, giving each letter of the alphabet an element of the tuple
 def fTupleToDico(Tuple, alphabet):
     rtnDico = {}
     for ind, lettre in enumerate(alphabet):
@@ -59,8 +59,8 @@ def fTupleToDico(Tuple, alphabet):
     return(rtnDico)
 
 
-# Fonction qui réunie des charactère par 4 dans une chaine de charactère
-#ex: "AAAAAA" -> "AAAA AA"
+# Function that joins characters by 4 in a character string
+# ex: "AAAAAA" -> "AAAA AA"
 def fPuissanceTexte(texte):
     LrtnTextes = []
     for i in range(0, len(texte)+1, 4):
@@ -69,6 +69,7 @@ def fPuissanceTexte(texte):
         else:
             LrtnTextes.append(''.join(texte[i:]))
     return(LrtnTextes)
+
 
 if __name__ == '__main__':
     pass

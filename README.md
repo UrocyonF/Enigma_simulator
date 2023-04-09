@@ -86,7 +86,7 @@ This folder contains the QR code that can be used to enter the parameters of the
 ### Main screen
 The main screen of the program look like this:
 
-![Main Screen](main_screen.png)
+![Main Screen](images\main_screen.png)
 The different parts of the screen are:
 
 - In the left panel :
@@ -104,7 +104,7 @@ The different parts of the screen are:
 ### Option screen
 The option screen of the program look like this:
 
-![Option Screen](option_screen.png)
+![Option Screen](images\option_screen.png)
 The different parts of the screen are:
 
 - The two top button :
