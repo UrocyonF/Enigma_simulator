@@ -17,10 +17,10 @@ from PIL import Image
 
 import qrcode
 
-import EnigmFonctionAuto
+import files.EnigmFonctionAuto as EnigmFonctionAuto
 
 
-# Tous les tuples parmient lesquels on peut choisir (les 8 rotors et 3 réflecteurs disponiblent)
+# All tuples to choose from (all 8 rotors and 3 reflectors available)
 RotorI = ('E', 'K', 'M', 'F', 'L', 'G', 'D', 'Q', 'V', 'Z', 'N', 'T', 'O', 'W', 'Y', 'H', 'X', 'U', 'S', 'P', 'A', 'I', 'B', 'R', 'C', 'J')
 RotorII = ('A', 'J', 'D', 'K', 'S', 'I', 'R', 'U', 'X', 'B', 'L', 'H', 'W', 'T', 'M', 'C', 'Q', 'G', 'Z', 'N', 'P', 'Y', 'F', 'V', 'O', 'E')
 RotorIII = ('B', 'D', 'F', 'H', 'J', 'L', 'C', 'P', 'R', 'T', 'X', 'V', 'Z', 'N', 'Y', 'E', 'I', 'W', 'G', 'A', 'K', 'M', 'U', 'S', 'Q', 'O')
@@ -36,8 +36,8 @@ ReflectorB = ('Y', 'R', 'U', 'H', 'Q', 'S', 'L', 'D', 'P', 'X', 'N', 'G', 'O', '
 ReflectorC = ('F', 'V', 'P', 'J', 'I', 'A', 'O', 'Y', 'E', 'D', 'R', 'Z', 'X', 'W', 'G', 'C', 'T', 'K', 'U', 'Q', 'S', 'B', 'N', 'M', 'H', 'L')
 TNomReflector = (ReflectorA, ReflectorB, ReflectorC)
 
-# Définition pour la création du QRcode (avec un taux de perte acceptable de 25%)
-#avec un taux de perte acceptable de 25% et un affichage classique
+# Definition for the creation of the QRcode (with an acceptable loss rate of 25%)
+# with an acceptable loss rate of 25% and a classic display
 qr = qrcode.QRCode(
     version=1,
     error_correction=qrcode.constants.ERROR_CORRECT_Q,
@@ -46,47 +46,47 @@ qr = qrcode.QRCode(
 )
 
 
-# Fonction pour vérifier l'entrée des paramètres de connexion à l'avant de la machine (vérification des entrées)
+# Function to verify the connection parameters entry at the front of the machine (input verification)
 def InputConnexAvant(SCablage):
     LLettreConnexion = []
     try:
         DCablage = literal_eval(SCablage)
         if type(DCablage) != dict:
-            return(False, "Le câblage n'est pas au bon format (dictionaire demandé)")
+            return(False, "The wiring is not in the correct format (dictionary requested)")
         elif len(DCablage.keys()) > 24:
-            return(False, "Le dictionnaire doit contenir au plus 12 couples")
+            return(False, "The dictionary must contain at most 12 pairs")
         for key, value in DCablage.items():
             if not(key in ascii_uppercase) or not(value in ascii_uppercase):
-                return(False, "Les lettres doivent être des majuscules")
+                return(False, "Letters must be capitals")
             elif key == value:
-                return(False, "Les deux lettres ne peuvent pas être identiques")
+                return(False, "The two letters cannot be the same")
             elif DCablage[value] != key:
-                return(False, "La lettre " + key + " est connectée à la lettre " + value + " mais pas à l'inverse")
+                return(False, "Letter " + key + " is connected to the letter " + value + " but not vice versa")
             elif (key, value) in LLettreConnexion:
-                return(False, "La lettre " + key + " ou " + value + " est utilisée plusieurs fois")
+                return(False, "Letter " + key + " or " + value + " is used multiple times")
             LLettreConnexion.append((key, value))
         return(True, DCablage)
     except:
-        return(False, "Le câblage n'est pas au bon format (dictionaire demandé)")
+        return(False, "The wiring is not in the correct format (dictionary requested)")
 
 
-# Fonction pour l'entrée des rotors qui vont être utilisé (vérification des entrées)
-#on donne un string à vérifier pour avoir 3 nombre entre 1 et 9 (numéro du rotor)
+# Function for the input of the rotors that are going to be used (input check)
+# we give a string to check to have 3 numbers between 1 and 9 (rotor number)
 def InputRotor(STRotor):
     verif, retour = EnigmFonctionAuto.fInputTroisNombre(STRotor, (1, 10), False)
-    if verif == True:
+    if verif:
         return(verif, subTransfoInputRotor(retour), retour)
     return(verif, retour, "")
 
 
-# Fonction pour l'entrée du décalage innitiale des rotors (vérification des entrées)
-#on donne un string à vérifier pour avoir 3 nombre entre 0 et 26 (décalage innitiale des rotors)
+# Function for entering the initial offset of the rotors (input check)
+# we give a string to check to have 3 numbers between 0 and 26 (initial offset of the rotors)
 def InputDecalageRotor(SDecalageRotor):
     verif, retour = EnigmFonctionAuto.fInputTroisNombre(SDecalageRotor, (0, 26), True)
     return(verif, retour)
 
 
-# Fonction pour l'entrée des rélfecteurs à utilisé (vérification des entrées)
+# Function for input of reflectors to be used (input check)
 def InputReflecteur(SReflecteur):
     global TNomReflector
     verif = False
@@ -96,18 +96,18 @@ def InputReflecteur(SReflecteur):
             if retour in range(1, 4):
                 verif = True
             else:
-                verif, retour = False, "Le nombre doit être compris entre 1 et 3"
+                retour = "The number must be between 1 and 3"
         else:
-            verif, retour = False, "Le nombre n'est pas au bon format (entier demandé)"
+            retour = "The number is not in the correct format (integer requested)"
     except:
-        verif, retour = False, "L'entrée n'est pas au bon format"
-    if verif == True:
+        retour = "The input is not in the correct format"
+    if verif:
         return(verif, TNomReflector[retour-1], retour)
     return(verif, retour, "")
 
 
-# Fonction pour créer les connexions frontales (plugboard) de façon aléatoire
-#on va renvoyer un dictionaire où chaque l'un va être lié à une autre
+# Function to create the front connections (plugboard) randomly
+# we will return a dictionary where each one will be linked to anothe
 def subInputConnexAvant(LettreAlphabet):
     DConnexionAvant, LLettreConnexion = {}, []
     for _ in range(randint(0, 12)):
@@ -124,14 +124,14 @@ def subInputConnexAvant(LettreAlphabet):
     return(DConnexionAvant)
 
 
-# Fonction pour choisir 3 rotors de façon aléatoire
-#on va renvoyer 3 chiffres où chacun ne pourra apparaitre qu'une fois
+# Function to choose 3 rotors randomly
+# we will return 3 digits where each can only appear once
 def subInputRotor():
     numrotor = []
     numrotor = sample(range(1, 9), 3)
     return(numrotor)
 
-# Foncition pour mettre sous le bon format les rotors (int -> tuple)
+# Function to put the rotors in the right format (int -> tuple)
 def subTransfoInputRotor(numrotor):
     global TNomRotor
     LTRotor = []
@@ -140,27 +140,27 @@ def subTransfoInputRotor(numrotor):
     return(LTRotor)
 
 
-# Fonction pour choisir 3 décalages des rotors de façon aléatoire
-#on va renvoyer 3 nombres (entre 0 et 25) qui peuvent apparaitre plusieurs fois
+# Function to choose 3 random rotor offsets
+# we will return 3 numbers (between 0 and 25) which can appear several times
 def subInputDecalageRotor():
     LDecalage = [randint(0, 25) for _ in range(3)]
     return(LDecalage)
 
 
-# Fonction pour choisir 1 réflecteur de façon aléatoire
-#on va renvoyer 1 chiffre (entre 0 et 3)
+# Function to choose 1 reflector randomly
+# we will return 1 digit (between 0 and 3)
 def subInputReflecteur():
     numrot = randint(1, 3)
     return(numrot)
 
-# Fonction pour mettre sous le bon format les rélfecteurs (int -> tuple)
+# Function to put reflectors in the correct format (int -> tuple)
 def subTransfoInputReflecteur(numrot):
     global TNomReflector
     return(TNomReflector[int(numrot)-1])
 
 
-# Fonction pour la création d'un QRcode en auto
-#on donne les données et le nom du l'image qui va être créé
+# Function for creating a QRcode in auto
+# we give the data and the name of the image that will be created
 def DataToQRcode(data,name):
     try:
         qr.clear()
@@ -168,20 +168,20 @@ def DataToQRcode(data,name):
         qr.make(fit=True)
         img = qr.make_image(fill_color="black", back_color="white")
         img.save(f'QRcode/{name}.png')
-        return("Enregistrement réussi", True)
+        return("Recording completed", True)
     except:
-        return("Une erreur est survenu", False)
+        return("An error has occurred", False)
 
 
-# Fonction pour la lecture d'un QRcode en auto
+# Function for reading a QRcode in car
 def QRcodeToData(file):
     try:
         image = Image.open(file)
         qr_code = pyzbar.decode(image)[0]
         data= qr_code.data.decode("utf-8")
-        return("Lecture réussi", data)
+        return("Reading successful", data)
     except:
-        return("Une erreur est survenu", False)
+        return("An error has occurred", False)
 
 
 if __name__ == "__main__":
