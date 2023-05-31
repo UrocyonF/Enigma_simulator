@@ -47,10 +47,12 @@ A list of technologies used within the project:
 The project is organised as follow:
 ```
 ├── main.py
-├── EnigmComputAuto.py
-├── EnigmFonctionAuto.py
-├── EnigmInputAuto.py
-├── enigma.ico
+├── files
+│   ├── EnigmComputAuto.py
+│   ├── EnigmFonctionAuto.py
+│   └── EnigmInputAuto.py
+├── images
+│   └──  enigma.ico
 ├── QRcode
 │   ├── QRCparametre.png
 ╵   └── QRCparametre1.png
@@ -77,7 +79,7 @@ This file is the icon to be used by [tkinter](https://docs.python.org/3/library/
 #
 
 ### [```QRcode```](/QRcode/)
-This folder contains the QR code that can be used to enter the parameters of the Enigma machine. There is already two exemple of QR code provided in the folder.
+This folder contains the QR codes that can be used to enter the parameters of the Enigma machine. There is already two exemples of QR code provided in the folder.
 
 ***
 <a name="how-to-use"></a>
@@ -110,7 +112,7 @@ The different parts of the screen are:
 - The two top button :
     - The button to randomize the parameters,
     - The button to enter the parameters with a QR code.
-- The for parameters :
+- The four parameters :
     - The choice of the letters linked by the plugboards,
     - The choice of the rotors,
     - The choice of the position of the rotors,
