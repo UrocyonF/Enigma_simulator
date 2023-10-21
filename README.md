@@ -1,4 +1,4 @@
-# Enigma Project - 2021 / 2022
+# Enigma simulation Project - 2021 / 2022
 
 ## Table of contents
 1. [General Information](#general-info)
