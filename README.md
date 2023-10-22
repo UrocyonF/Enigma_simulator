@@ -6,6 +6,7 @@
 3. [Files Organisation](#organisation)
 4. [How to use](#how-to-use)
 
+
 ***
 <a name="general-info"></a>
 ## General Informations
@@ -25,20 +26,22 @@ The main screen will able the user to see the current state of the machine, the 
 
 The option screen will allow the user to choose the different parameters of the Enigma machine. It will also allow the user to choose if he wants to enter the parameters manually or by using a QR code.
 
+
 ***
 <a name="technologies"></a>
 ## Technologies
 
 A list of technologies used within the project:
-* [Python](https://www.python.org/): Version 3.9.1
-* [tkinter](https://docs.python.org/3/library/tkinter.html): Version 8.6
-* [string](https://docs.python.org/3/library/string.html): Version 3.9.1
-* [os](https://docs.python.org/3/library/os.html): Version 3.9.1
-* [random](https://docs.python.org/3/library/random.html): Version 3.9.1
-* [ast](https://docs.python.org/3/library/ast.html): Version 3.9.1
-* [pyzbar](https://pypi.org/project/pyzbar/): Version 0.1.8
-* [Pillow](https://pypi.org/project/Pillow/): Version 8.1.0
-* [qrcode](https://pypi.org/project/qrcode/): Version 6.1
+* [Python](https://www.python.org/)
+* [tkinter](https://docs.python.org/3/library/tkinter.html)
+* [Pillow](https://pypi.org/project/Pillow/)
+* [string](https://docs.python.org/3/library/string.html)
+* [random](https://docs.python.org/3/library/random.html)
+* [ast](https://docs.python.org/3/library/ast.html)
+* [pyzbar](https://pypi.org/project/pyzbar/)
+* [qrcode](https://pypi.org/project/qrcode/)
+* [os](https://docs.python.org/3/library/os.html)
+
 
 ***
 <a name="organisation"></a>
@@ -80,6 +83,7 @@ This file is the icon to be used by [tkinter](https://docs.python.org/3/library/
 
 ### [```QRcode```](/QRcode/)
 This folder contains the QR codes that can be used to enter the parameters of the Enigma machine. There is already two exemples of QR code provided in the folder.
+
 
 ***
 <a name="how-to-use"></a>
