@@ -1,5 +1,5 @@
 """
-Copyright (c) 2023, UrocyonF
+Copyright (c) 2022, UrocyonF
 All rights reserved.
 
 This source code is licensed under the BSD-style license found in the
@@ -8,7 +8,6 @@ LICENSE file in the root directory of this source tree.
 Author: UrocyonF
 Date: 2021 - 2022
 """
-
 # Function to request 3 numbers in a single input (+ input protected as much as possible)
 # we enter the input string, the range of the 3 numbers and if they can be similar or no
 def fInputTroisNombre(inputstring, inputrange, meme):
